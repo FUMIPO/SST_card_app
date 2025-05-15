@@ -1,6 +1,6 @@
 # どんなきもち？(感情カードアプリ)
 
-![Emotion App Banner](./public/apple-touch-icon.png)
+![Emotion App Banner](https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/apple-touch-icon.png)
 
 ## 🧒 わたしはいま、どうかんじているの？
 
@@ -23,18 +23,17 @@
 ---
 
 ## 📸 スクリーンショット
+### ホーム画面（感情の選択）  
+![ホーム画面](https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/001.png)
 
-### ホーム画面（感情の選択）
-![ホーム画面](./public/001.png)
+### 感情の強さを表現するスライダー（うれしい Level1）  
+![感情スライダー Level1](https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/002.png)
 
-### 感情の強さを表現するスライダー(うれしい Level1)
-![感情スライダー](./public/002.png)
+### 感情の強さを表現するスライダー（うれしい Level5）  
+![感情スライダー Level5](https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/003.png)
 
-### 感情の強さを表現するスライダー(うれしい Level5)
-![感情スライダー](./public/003.png)
-
-### ありがとうモーダル
-![感情スライダー](./public/004.png)
+### ありがとうモーダル  
+![ありがとうモーダル](https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/004.png)
 
 ---
 
