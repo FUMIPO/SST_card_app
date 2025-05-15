@@ -2,16 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
+/* スマホ向け全体設定 */
+html,
+body {
+  overflow-x: hidden;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+  user-select: none;
+}
+
 @layer components {
   .emotion-slider {
-    @apply w-full h-5 bg-gray-200 rounded-lg appearance-none cursor-pointer;
+    @apply w-full h-10 bg-gray-200 rounded-full appearance-none cursor-pointer mx-auto;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
   }
-  
+
+  /* Webkit (iOS, Safari) */
   .emotion-slider::-webkit-slider-thumb {
-    @apply w-7 h-7 rounded-full bg-green-500 appearance-none;
+    @apply w-10 h-10 rounded-full bg-blue-500 appearance-none shadow-lg cursor-pointer;
+    transform: translateY(-18%);
+    transition: transform 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
   }
-  
+
+  /* ドラッグ中のスタイル */
+  .emotion-slider:active::-webkit-slider-thumb {
+    @apply bg-blue-600;
+    transform: translateY(-18%) scale(1.1);
+  }
+
+  /* Firefox */
   .emotion-slider::-moz-range-thumb {
-    @apply w-7 h-7 rounded-full bg-green-500 border-0;
+    @apply w-10 h-10 rounded-full bg-blue-500 border-0 shadow-lg cursor-pointer;
+    transform: translateY(-18%);
+    transition: transform 0.2s ease;
   }
-} 
+
+  .emotion-slider:active::-moz-range-thumb {
+    @apply bg-blue-600;
+    transform: translateY(-18%) scale(1.1);
+  }
+
+  /* スライダートラックのスタイル */
+  .emotion-slider::-webkit-slider-runnable-track {
+    @apply rounded-full h-5 bg-gray-200;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+  }
+
+  .emotion-slider::-moz-range-track {
+    @apply rounded-full h-5 bg-gray-200;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+  }
+
+  .slider-value {
+    @apply text-4xl font-bold text-gray-700 mt-2;
+  }
+
+  .slider-label {
+    @apply text-xl font-bold rounded-full w-12 h-12 flex items-center justify-center bg-gray-200 text-gray-700;
+    -webkit-touch-callout: none;
+  }
+
+  /* アニメーション */
+  @keyframes gentle-pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .animate-gentle-pulse {
+    animation: gentle-pulse 2s infinite ease-in-out;
+  }
+}
