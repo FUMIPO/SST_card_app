@@ -27,6 +27,18 @@ const Emotion = ({ emotionId }: Props) => {
     return size;
   };
 
+  // レベルに応じた色の計算
+  const getLevelColor = (currentLevel: number) => {
+    const colors = {
+      1: "#E5E7EB", // gray-200
+      2: "#93C5FD", // blue-300
+      3: "#3B82F6", // blue-500
+      4: "#F97316", // orange-500
+      5: "#EF4444", // red-500
+    };
+    return colors[currentLevel as keyof typeof colors];
+  };
+
   // スライダーの値変更ハンドラ
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLevel(Number(e.target.value));
@@ -62,6 +74,11 @@ const Emotion = ({ emotionId }: Props) => {
               onChange={handleSliderChange}
               className="emotion-slider touch-manipulation w-full"
               aria-label={`${emotion.name}のつよさを1から5で選択`}
+              style={
+                {
+                  "--track-color": getLevelColor(level),
+                } as React.CSSProperties
+              }
             />
           </div>
 
@@ -69,15 +86,13 @@ const Emotion = ({ emotionId }: Props) => {
           <div className="flex justify-between px-2 mb-6">
             {[1, 2, 3, 4, 5].map((num) => (
               <div key={num} className="flex flex-col items-center">
-                <div
-                  className={`w-4 h-4 rounded-full transition-all mb-2 ${
-                    num <= level ? "bg-blue-500 scale-110" : "bg-gray-300"
-                  }`}
-                />
                 <span
                   className={`text-xl font-bold ${
-                    num === level ? "text-blue-500 scale-125" : "text-gray-500"
+                    num === level ? "scale-125" : "text-gray-500"
                   }`}
+                  style={{
+                    color: num === level ? getLevelColor(num) : "",
+                  }}
                 >
                   {num}
                 </span>
@@ -87,7 +102,8 @@ const Emotion = ({ emotionId }: Props) => {
 
           <div className="text-center mt-4">
             <p className="slider-value select-none">
-              {level} <span className="text-2xl text-gray-500">/ 5</span>
+              <span style={{ color: getLevelColor(level) }}>{level}</span>{" "}
+              <span className="text-2xl text-gray-500">/ 5</span>
             </p>
             <p className="text-xl text-gray-600 mt-2 select-none">
               {emotion.name}のつよさ
