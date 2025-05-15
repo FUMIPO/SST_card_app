@@ -10,6 +10,16 @@ body {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: none;
   user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iOS SafariなどのSafe Areaに対応したパディング */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 1.5rem);
 }
 
 @layer components {
@@ -18,12 +28,16 @@ body {
     background-color: var(--track-color, #e5e7eb);
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
+    touch-action: pan-x; /* スライダー操作のためにX軸方向の操作のみ許可 */
     --track-color: #e5e7eb;
   }
 
   /* Webkit (iOS, Safari) */
   .emotion-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
     appearance: none;
     width: 40px;
     height: 40px;
@@ -71,6 +85,24 @@ body {
   .emotion-slider::-moz-range-track {
     @apply rounded-full h-5;
     background-color: var(--track-color, #e5e7eb);
+  }
+
+  /* クロスブラウザ用の追加スタイル */
+  .emotion-slider::-ms-track {
+    @apply rounded-full h-5;
+    background-color: var(--track-color, #e5e7eb);
+    border: none;
+    color: transparent;
+  }
+
+  .emotion-slider::-ms-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    margin-top: 0;
   }
 
   /* アニメーション */
