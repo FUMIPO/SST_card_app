@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Emotion as EmotionType } from "../types/emotionMap";
 import { getUnicodeForEmotion } from "../utils/getUnicodeForEmotion";
 import { emotions } from "../types/emotion";
@@ -11,6 +11,7 @@ type Props = {
 
 const Emotion = ({ emotionId, initialLevel = 3, onLevelChange }: Props) => {
   const [level, setLevel] = useState(initialLevel);
+  const [emojiSize, setEmojiSize] = useState(100);
   const sliderRef = useRef<HTMLInputElement>(null);
   const emotion = emotions.find((e) => e.id === emotionId);
 
@@ -20,14 +21,34 @@ const Emotion = ({ emotionId, initialLevel = 3, onLevelChange }: Props) => {
   // 常にレベル1の絵文字を使用
   const emojiUrl = getUnicodeForEmotion(emotionType, 1);
 
-  // レベルに応じた絵文字サイズの計算（1:小さく、5:大きく）
-  const getEmojiSize = () => {
-    const minSize = 100; // 最小サイズ（レベル1）
-    const maxSize = 360; // 最大サイズ（レベル5）
+  // 絵文字サイズを計算
+  const calculateEmojiSize = () => {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    const smallerDimension = Math.min(screenWidth, screenHeight);
+
+    // 小さい画面では最大サイズを制限
+    const minSize = smallerDimension * 0.2; // 最小サイズ（レベル1）
+    const maxSize = smallerDimension * 0.8; // 最大サイズ（レベル5）
+
     // レベルに基づいて計算
     const size = minSize + ((maxSize - minSize) / 4) * (level - 1);
-    return size;
+    return Math.min(size, maxSize); // 最大値で制限
   };
+
+  // 画面サイズやレベルが変わったときに絵文字サイズを再計算
+  useEffect(() => {
+    const handleResize = () => {
+      setEmojiSize(calculateEmojiSize());
+    };
+
+    handleResize(); // 初期サイズを設定
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [level]);
 
   // レベルに応じた色の計算
   const getLevelColor = (currentLevel: number) => {
@@ -41,14 +62,6 @@ const Emotion = ({ emotionId, initialLevel = 3, onLevelChange }: Props) => {
     return colors[currentLevel as keyof typeof colors];
   };
 
-  const strengthToWords = {
-    1: "ちょっぴり",
-    2: "すこし",
-    3: "",
-    4: "たくさん",
-    5: "いーっぱい",
-  };
-
   // スライダーの値変更ハンドラ
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newLevel = Number(e.target.value);
@@ -60,21 +73,24 @@ const Emotion = ({ emotionId, initialLevel = 3, onLevelChange }: Props) => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      {/* 絵文字コンテナに固定高さを設定し、下部に余白を持たせる */}
-      <div className="mb-16 h-[200px] flex items-center justify-center">
+    <div className="flex flex-col items-center w-full">
+      {/* 絵文字コンテナに固定高さを設定し、スライダーの位置が動かないようにする */}
+      <div
+        className="flex items-center justify-center relative"
+        style={{ height: "200px" }}
+      >
         <img
           src={emojiUrl}
           alt={emotion.name}
           className="transition-all duration-300"
           style={{
-            width: `${getEmojiSize()}px`,
-            height: `${getEmojiSize()}px`,
+            width: `${emojiSize}px`,
+            height: `${emojiSize}px`,
           }}
         />
       </div>
 
-      <div className="w-full max-w-md mx-auto px-6">
+      <div className="w-full max-w-md mx-auto px-6 mt-4">
         {/* スライダーコンテナをタッチ操作用に最適化 */}
         <div className="touch-manipulation relative pb-8 pt-4">
           {/* スライダー */}

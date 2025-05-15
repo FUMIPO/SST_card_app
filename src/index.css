@@ -73,22 +73,13 @@ body {
     background-color: var(--track-color, #e5e7eb);
   }
 
-  .slider-value {
-    @apply text-4xl font-bold text-gray-700 mt-2;
-  }
-
-  .slider-label {
-    @apply text-xl font-bold rounded-full w-12 h-12 flex items-center justify-center bg-gray-200 text-gray-700;
-    -webkit-touch-callout: none;
-  }
-
   /* アニメーション */
   @keyframes gentle-pulse {
     0% {
       transform: scale(1);
     }
     50% {
-      transform: scale(1.05);
+      transform: scale(1.1);
     }
     100% {
       transform: scale(1);
