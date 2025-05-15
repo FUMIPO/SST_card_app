@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { emotions } from '../types/emotion';
+import { useParams, useNavigate } from "react-router-dom";
+import { emotions } from "../types/emotion";
+import Emotion from "../components/Emotion";
 
 const EmotionDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const emotion = emotions.find(e => e.id === id);
-  const [intensity, setIntensity] = useState(0);
+  const emotion = emotions.find((e) => e.id === id);
 
   if (!emotion) {
     return (
@@ -22,24 +21,10 @@ const EmotionDetail = () => {
         わたしはいま {emotion.name} です
       </h1>
       <div className="max-w-md mx-auto mb-8">
-        <div className="flex items-center gap-3 mb-4">
-          <span>0</span>
-          <input
-            type="range"
-            min="0"
-            max="5"
-            value={intensity}
-            onChange={(e) => setIntensity(Number(e.target.value))}
-            className="emotion-slider touch-none"
-          />
-          <span>5</span>
-        </div>
-        <p className="text-lg text-gray-600">
-          {emotion.name}のつよさは {intensity} です
-        </p>
+        <Emotion emotionId={emotion.id} />
       </div>
       <button
-        onClick={() => navigate('/')}
+        onClick={() => navigate("/")}
         className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition-colors touch-none"
       >
         戻る
@@ -48,4 +33,4 @@ const EmotionDetail = () => {
   );
 };
 
-export default EmotionDetail; 
+export default EmotionDetail;
