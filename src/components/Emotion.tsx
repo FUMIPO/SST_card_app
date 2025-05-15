@@ -5,10 +5,12 @@ import { emotions } from "../types/emotion";
 
 type Props = {
   emotionId: string;
+  initialLevel?: number;
+  onLevelChange?: (level: number) => void;
 };
 
-const Emotion = ({ emotionId }: Props) => {
-  const [level, setLevel] = useState(1);
+const Emotion = ({ emotionId, initialLevel = 3, onLevelChange }: Props) => {
+  const [level, setLevel] = useState(initialLevel);
   const sliderRef = useRef<HTMLInputElement>(null);
   const emotion = emotions.find((e) => e.id === emotionId);
 
@@ -39,9 +41,22 @@ const Emotion = ({ emotionId }: Props) => {
     return colors[currentLevel as keyof typeof colors];
   };
 
+  const strengthToWords = {
+    1: "ちょっぴり",
+    2: "すこし",
+    3: "",
+    4: "たくさん",
+    5: "いーっぱい",
+  };
+
   // スライダーの値変更ハンドラ
   const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLevel(Number(e.target.value));
+    const newLevel = Number(e.target.value);
+    setLevel(newLevel);
+    // 親コンポーネントに通知
+    if (onLevelChange) {
+      onLevelChange(newLevel);
+    }
   };
 
   return (
@@ -98,16 +113,6 @@ const Emotion = ({ emotionId }: Props) => {
                 </span>
               </div>
             ))}
-          </div>
-
-          <div className="text-center mt-4">
-            <p className="slider-value select-none">
-              <span style={{ color: getLevelColor(level) }}>{level}</span>{" "}
-              <span className="text-2xl text-gray-500">/ 5</span>
-            </p>
-            <p className="text-xl text-gray-600 mt-2 select-none">
-              {emotion.name}のつよさ
-            </p>
           </div>
         </div>
       </div>

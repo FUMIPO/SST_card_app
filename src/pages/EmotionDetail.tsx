@@ -1,12 +1,30 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { emotions } from "../types/emotion";
 import Emotion from "../components/Emotion";
 
+// 感情の強さを言葉で表現するマッピング
+const strengthToWords = {
+  1: "ちょっぴり",
+  2: "すこし",
+  3: "",
+  4: "たくさん",
+  5: "いーっぱい",
+};
+
 const EmotionDetail = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id, level: initialLevel = "3" } = useParams<{
+    id: string;
+    level: string;
+  }>();
+  const [level, setLevel] = useState(parseInt(initialLevel));
   const navigate = useNavigate();
   const emotion = emotions.find((e) => e.id === id);
+
+  // レベル変更ハンドラ
+  const handleLevelChange = (newLevel: number) => {
+    setLevel(newLevel);
+  };
 
   // スマホ向け設定
   useEffect(() => {
@@ -48,23 +66,33 @@ const EmotionDetail = () => {
 
   return (
     <div
-      className="fixed inset-0 flex flex-col justify-between p-4 overflow-hidden"
+      className="fixed inset-0 flex flex-col p-4 overflow-hidden"
       style={{ height: "calc(var(--vh, 1vh) * 100)" }}
     >
-      <header className="pt-2 pb-4">
-        <h1 className="text-2xl font-bold text-gray-800 rounded-lg bg-gray-100 py-4 shadow-sm">
-          わたしはいま{" "}
-          <span style={{ color: emotion.color }}>{emotion.name}</span> です
-        </h1>
+      <header className="pt-2">
+        <div className="text-center rounded-lg bg-gray-100 py-6 px-4 shadow-sm">
+          <h2 className="text-xl font-medium text-gray-700 mb-2">
+            わたしはいま
+          </h2>
+          <h1 className="text-3xl font-bold text-gray-800">
+            {strengthToWords[level as keyof typeof strengthToWords] &&
+              `${strengthToWords[level as keyof typeof strengthToWords]} `}
+            <span style={{ color: emotion.color }}>{emotion.name}</span> です
+          </h1>
+        </div>
       </header>
 
-      <main className="flex-grow flex items-center justify-center">
+      <main className="flex items-center justify-center mt-12">
         <div className="w-full max-w-md">
-          <Emotion emotionId={emotion.id} />
+          <Emotion
+            emotionId={emotion.id}
+            initialLevel={level}
+            onLevelChange={handleLevelChange}
+          />
         </div>
       </main>
 
-      <footer className="py-6">
+      <footer className="py-6 mt-auto">
         <button
           onClick={() => navigate("/")}
           className="bg-blue-500 text-white text-xl font-bold px-8 py-4 rounded-full shadow-lg active:bg-blue-700 active:scale-95 touch-manipulation transition-all"
