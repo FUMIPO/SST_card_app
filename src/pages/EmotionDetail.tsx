@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { emotions } from "../types/emotion";
 import Emotion from "../components/Emotion";
+import { FiCheckCircle } from "react-icons/fi";
 
 // 感情の強さを言葉で表現するマッピング
 const strengthToWords = {
@@ -20,6 +21,7 @@ const EmotionDetail = () => {
   const [level, setLevel] = useState(parseInt(initialLevel));
   const navigate = useNavigate();
   const emotion = emotions.find((e) => e.id === id);
+  const [showThankYouModal, setShowThankYouModal] = useState(false);
 
   // レベル変更ハンドラ
   const handleLevelChange = (newLevel: number) => {
@@ -77,12 +79,13 @@ const EmotionDetail = () => {
           <h1 className="text-3xl font-bold text-gray-800">
             {strengthToWords[level as keyof typeof strengthToWords] &&
               `${strengthToWords[level as keyof typeof strengthToWords]} `}
-            <span style={{ color: emotion.color }}>{emotion.name}</span> です
+            <span style={{ color: emotion.color }}>{emotion.name}</span>
           </h1>
+          <h2 className="text-xl font-medium text-gray-700 mt-2">です</h2>
         </div>
       </header>
 
-      <main className="flex items-center justify-center mt-12">
+      <main className="flex items-center justify-center mt-12 flex-col">
         <div className="w-full max-w-md">
           <Emotion
             emotionId={emotion.id}
@@ -90,6 +93,13 @@ const EmotionDetail = () => {
             onLevelChange={handleLevelChange}
           />
         </div>
+
+        <button
+          onClick={() => setShowThankYouModal(true)}
+          className="mt-8 flex items-center justify-center bg-white rounded-full p-4 shadow-md hover:shadow-lg transition-all duration-300"
+        >
+          <FiCheckCircle className="text-green-500 w-12 h-12" />
+        </button>
       </main>
 
       <footer className="py-6 mt-auto">
@@ -101,6 +111,27 @@ const EmotionDetail = () => {
           もどる
         </button>
       </footer>
+
+      {/* サンクスモーダル */}
+      {showThankYouModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-fadeIn">
+          <div className="bg-white rounded-xl p-6 w-full max-w-sm flex flex-col items-center shadow-lg animate-scaleIn">
+            <div className="text-5xl mb-4">🙏</div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              おしえてくれてありがとう！
+            </h2>
+            <button
+              onClick={() => {
+                setShowThankYouModal(false);
+                navigate("/");
+              }}
+              className="bg-green-500 text-white text-lg font-semibold px-8 py-3 rounded-full shadow-md active:bg-green-600 active:scale-95 transition-all"
+            >
+              もどる
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
