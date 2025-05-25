@@ -28,8 +28,8 @@ const Emotion = ({ emotionId, initialLevel = 3, onLevelChange }: Props) => {
   if (!emotion) return null;
 
   const emotionType = emotionId as EmotionType;
-  // 固定の絵文字を使用（レベル3）- サイズのみ変更
-  const emojiUrl = getUnicodeForEmotion(emotionType, 3);
+  // ホーム画面と同じレベル1の絵文字を使用（サイズのみ変更）
+  const emojiUrl = getUnicodeForEmotion(emotionType, 1);
 
   // レベルに応じたサイズクラスを取得
   const sizeInfo = SIZE_MAP[level as keyof typeof SIZE_MAP] || SIZE_MAP[3];

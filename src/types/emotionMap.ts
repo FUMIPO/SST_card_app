@@ -13,7 +13,7 @@ export const emotionMap: Record<Emotion, Record<string, string[]>> = {
     emoji: ["1F642", "1F60A", "1F600", "1F604", "1F603"], // 微笑み → 大笑い
   },
   sad: {
-    emoji: ["1F614", "1F61F", "1F622", "1F62D", "1F62B"], // 悲しい → 号泣
+    emoji: ["1F622", "1F61F", "1F622", "1F62D", "1F62B"], // 悲しい → 号泣
   },
   angry: {
     emoji: ["1F620", "1F624", "1F621", "1F47F", "1F92C"], // 怒り → 激怒
@@ -25,7 +25,7 @@ export const emotionMap: Record<Emotion, Record<string, string[]>> = {
     emoji: ["1F628", "1F630", "1F627", "1F626", "1F631"], // 恐れ → 恐怖
   },
   fun: {
-    emoji: ["1F60A", "1F603", "1F602", "1F604", "1F923"], // 楽しい → 爆笑
+    emoji: ["1F606", "1F603", "1F602", "1F604", "1F923"], // 楽しい → 爆笑
   },
 };
 
