@@ -23,17 +23,18 @@
 ---
 
 ## 📸 スクリーンショット
-### ホーム画面（感情の選択）  
-![ホーム画面](https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/001.png)
+### ホーム画面（感情の選択）
+<img src="https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/001.png" alt="ホーム画面" width="300" />
 
-### 感情の強さを表現するスライダー（うれしい Level1）  
-![感情スライダー Level1](https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/002.png)
+### 感情の強さを表現するスライダー（うれしい Level1）
+<img src="https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/002.png" alt="スライダー Level1" width="300" />
 
-### 感情の強さを表現するスライダー（うれしい Level5）  
-![感情スライダー Level5](https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/003.png)
+### 感情の強さを表現するスライダー（うれしい Level5）
+<img src="https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/003.png" alt="スライダー Level5" width="300" />
 
-### ありがとうモーダル  
-![ありがとうモーダル](https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/004.png)
+### ありがとうモーダル
+<img src="https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/004.png" alt="ありがとうモーダル" width="300" />
+
 
 ---
 
@@ -63,7 +64,7 @@
 ## 🧩 今後のアップデート予定
 
 - スライダーのアニメーション強化
-- - 動物・人間など、表現スタイルの切り替え（ユーザーが選択できるように）
+- 動物・人間など、表現スタイルの切り替え（ユーザーが選択できるように）
 - 感情ログの記録（CSV or ローカル保存）
 - 音声読み上げ対応（SpeechSynthesis）
 
