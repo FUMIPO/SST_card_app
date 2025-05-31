@@ -20,8 +20,6 @@
 
 ---
 
----
-
 ## 📸 スクリーンショット
 ### ホーム画面（感情の選択）
 <img src="https://raw.githubusercontent.com/FUMIPO/SST_card_app/main/public/001.png" alt="ホーム画面" width="300" />
