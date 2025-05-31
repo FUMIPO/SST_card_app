@@ -10,7 +10,7 @@ export type Emotion =
 // 各感情に対して、強度レベル1-5に応じたUnicodeを定義
 export const emotionMap: Record<Emotion, Record<string, string[]>> = {
   happy: {
-    emoji: ["1F642", "1F60A", "1F600", "1F604", "1F603"], // 微笑み → 大笑い
+    emoji: ["1F60A", "1F60A", "1F60A", "1F60A", "1F60A"], // すべて同じ笑顔に
   },
   sad: {
     emoji: ["1F622", "1F61F", "1F622", "1F62D", "1F62B"], // 悲しい → 号泣
