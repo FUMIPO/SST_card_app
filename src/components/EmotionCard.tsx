@@ -12,8 +12,8 @@ const EmotionCard = ({ emotion }: Props) => {
   // emotionIdをEmotionType型に変換（型安全のため）
   const emotionType = emotion.id as EmotionType;
 
-  // レベル1の絵文字のUnicodeを取得
-  const emojiUnicode = emotionMap[emotionType]?.emoji[0];
+  // 絵文字のUnicodeを取得
+  const emojiUnicode = emotionMap[emotionType].emoji;
   const emojiUrl = `https://openmoji.org/data/color/svg/${emojiUnicode}.svg`;
 
   return (
