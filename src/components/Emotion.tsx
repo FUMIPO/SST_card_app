@@ -50,7 +50,7 @@ const Emotion = ({ emotionId, initialLevel = 3, onLevelChange }: Props) => {
 
     // 強制的に再レンダリング
     setLevel(newLevel);
-    setForceUpdate((prev) => prev + 1);
+    setForceUpdate((prev: number) => prev + 1);
 
     // 親コンポーネントに通知
     if (onLevelChange) {
@@ -69,7 +69,7 @@ const Emotion = ({ emotionId, initialLevel = 3, onLevelChange }: Props) => {
 
     // 強制的に再レンダリング
     setLevel(newLevel);
-    setForceUpdate((prev) => prev + 1);
+    setForceUpdate((prev: number) => prev + 1);
 
     if (onLevelChange) {
       onLevelChange(newLevel);
@@ -135,7 +135,7 @@ const Emotion = ({ emotionId, initialLevel = 3, onLevelChange }: Props) => {
                 className="flex flex-col items-center"
                 onClick={() => {
                   setLevel(num);
-                  setForceUpdate((prev) => prev + 1);
+                  setForceUpdate((prev: number) => prev + 1);
                   if (onLevelChange) onLevelChange(num);
                 }}
               >

@@ -19,7 +19,9 @@ const EmotionDetail = () => {
     id: string;
     level: string;
   }>();
-  const [level, setLevel] = useState(parseInt(initialLevel));
+  const parsedLevel = parseInt(initialLevel);
+  const safeLevel = parsedLevel >= 1 && parsedLevel <= 5 ? parsedLevel : 3;
+  const [level, setLevel] = useState(safeLevel);
   const navigate = useNavigate();
   const emotion = emotions.find((e) => e.id === id);
   const [showThankYouModal, setShowThankYouModal] = useState(false);

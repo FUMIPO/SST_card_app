@@ -7,7 +7,7 @@ import { Emotion, emotionMap } from "../types/emotionMap";
  */
 export const getUnicodeForEmotion = (
   emotion: Emotion,
-  level: number // levelは使用しないが、互換性のために残す
+  _level: number // levelは使用しないが、互換性のために残す
 ): string => {
   // 該当する絵文字のUnicodeを取得
   const unicode = emotionMap[emotion].emoji;
